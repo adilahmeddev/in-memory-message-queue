@@ -1,13 +1,18 @@
 package events_notification
 
-import "testing"
+import (
+	"events-notification/messages"
+	"github.com/alecthomas/assert/v2"
+	"testing"
+)
 
 func TestQueue(t *testing.T) {
-
+	messageQueue := NewMemoryQueue()
 	t.Run("I am able to add messages to the queue", func(t *testing.T) {
-
+		message := messages.NewMessage("Hello world")
+		err := messageQueue.Add(message)
+		assert.NoError(t, err)
 	})
-
 }
 
 func TestProducer(t *testing.T) {
