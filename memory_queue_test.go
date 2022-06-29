@@ -28,10 +28,3 @@ func TestQueue(t *testing.T) {
 	})
 
 }
-
-func TestProducer(t *testing.T) {
-	//t.Run("when I create a message with my producer, I expect it to be sent to its destination", func(t *testing.T) {
-	//	messageQueue := NewMessageQueue()
-	//	producer := NewProducer(messageQueue)
-	//})
-}
