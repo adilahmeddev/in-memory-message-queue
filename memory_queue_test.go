@@ -2,6 +2,7 @@ package events_notification
 
 import (
 	"events-notification/helpers"
+	"events-notification/messages"
 	"github.com/alecthomas/assert/v2"
 	"testing"
 )
@@ -48,11 +49,17 @@ func TestQueue(t *testing.T) {
 
 		_, err = mq.GetLastMessage()
 		assert.NoError(t, err)
-		
+
 		count, err = mq.GetMessageCount()
 		assert.NoError(t, err)
 		assert.Equal(t, 0, count)
 
+	})
+
+	t.Run("can subscribe to the message queue", func(t *testing.T) {
+		mq := NewMemoryQueue()
+		listener := make(chan messages.Message, 1)
+		mq.Subscribe(listener)
 	})
 
 }

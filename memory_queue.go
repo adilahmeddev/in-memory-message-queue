@@ -8,10 +8,16 @@ type Queue interface {
 	Add(message messages.Message) error
 	GetLastMessage() (messages.Message, error)
 	GetMessageCount() (int, error)
+	Subscribe(listener chan messages.Message) error
 }
 
 type MemoryQueue struct {
 	messages []messages.Message
+}
+
+func (m *MemoryQueue) Subscribe(listener chan messages.Message) error {
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MemoryQueue) GetMessageCount() (int, error) {
