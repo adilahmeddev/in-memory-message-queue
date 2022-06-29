@@ -25,6 +25,34 @@ func TestQueue(t *testing.T) {
 		assert.NoError(t, err)
 
 		assert.Equal(t, latestMessage, gotMessage)
+		t.Run("and the message is removed from the queue", func(t *testing.T) {
+			gotMessage2, err := messageQueue.GetLastMessage()
+			assert.NoError(t, err)
+
+			assert.NotEqual(t, latestMessage, gotMessage2)
+			assert.Equal(t, message, gotMessage2)
+		})
+	})
+	t.Run("I am able to get the length of the message queue", func(t *testing.T) {
+		mq := NewMemoryQueue()
+
+		count, err := mq.GetMessageCount()
+		assert.NoError(t, err)
+		assert.Equal(t, 0, count)
+
+		assert.NoError(t, mq.Add(helpers.RandomMessage()))
+
+		count, err = mq.GetMessageCount()
+		assert.NoError(t, err)
+		assert.Equal(t, 1, count)
+
+		_, err = mq.GetLastMessage()
+		assert.NoError(t, err)
+		
+		count, err = mq.GetMessageCount()
+		assert.NoError(t, err)
+		assert.Equal(t, 0, count)
+
 	})
 
 }
