@@ -2,6 +2,7 @@ package events_notification
 
 import (
 	"events-notification/messages"
+	"github.com/alecthomas/repr"
 )
 
 type Queue interface {
@@ -12,12 +13,14 @@ type Queue interface {
 }
 
 type MemoryQueue struct {
-	messages []messages.Message
+	listeners []chan messages.Message
+	messages  []messages.Message
+	history   []messages.Message
 }
 
 func (m *MemoryQueue) Subscribe(listener chan messages.Message) error {
-	//TODO implement me
-	panic("implement me")
+	m.listeners = append(m.listeners, listener)
+	return nil
 }
 
 func (m *MemoryQueue) GetMessageCount() (int, error) {
@@ -31,7 +34,15 @@ func (m *MemoryQueue) GetLastMessage() (messages.Message, error) {
 }
 
 func (m *MemoryQueue) Add(message messages.Message) error {
+	m.history = append(m.history, message)
 	m.messages = append(m.messages, message)
+	go func(messageParam messages.Message) {
+		repr.Println("listeners: ", m.listeners)
+		repr.Println("adding ", message)
+		for _, listener := range m.listeners {
+			listener <- message
+		}
+	}(message)
 	return nil
 }
 
