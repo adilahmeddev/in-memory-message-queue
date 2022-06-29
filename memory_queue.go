@@ -7,14 +7,14 @@ type Queue interface {
 }
 
 type MemoryQueue struct {
+	messages []messages.Message
 }
 
 func (m MemoryQueue) Add(message messages.Message) error {
-	//TODO implement me
-	panic("implement me")
+	m.messages = append(m.messages, message)
+	return nil
 }
 
 func NewMemoryQueue() Queue {
 	return &MemoryQueue{}
 }
-

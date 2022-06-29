@@ -8,11 +8,12 @@ import (
 
 func TestQueue(t *testing.T) {
 	messageQueue := NewMemoryQueue()
-	t.Run("I am able to add messages to the queue", func(t *testing.T) {
-		message := messages.NewMessage("Hello world")
+	message := messages.NewMessage("Hello world")
+	t.Run("I am able to add a message to the queue", func(t *testing.T) {
 		err := messageQueue.Add(message)
 		assert.NoError(t, err)
 	})
+
 }
 
 func TestProducer(t *testing.T) {
