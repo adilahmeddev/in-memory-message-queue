@@ -1,8 +1,8 @@
 package producer
 
 import (
-	mq "events-notification"
-	"events-notification/helpers"
+	"events-notification/models/helpers"
+	mq "events-notification/src"
 	"github.com/alecthomas/assert/v2"
 	"testing"
 )

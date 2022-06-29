@@ -1,19 +1,19 @@
 package producer
 
 import (
-	mq "events-notification"
-	"events-notification/messages"
+	"events-notification/models/messages"
+	. "events-notification/src"
 )
 
 type Producer struct {
-	queue mq.Queue
+	queue Queue
 }
 
 func (p Producer) Add(message messages.Message) error {
 	return p.queue.Add(message)
 }
 
-func NewProducer(queue mq.Queue) *Producer {
+func NewProducer(queue Queue) *Producer {
 	return &Producer{
 		queue: queue,
 	}

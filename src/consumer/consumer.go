@@ -2,8 +2,9 @@ package consumer
 
 import (
 	"context"
-	mq "events-notification"
-	"events-notification/messages"
+	"events-notification/models/messages"
+	mq "events-notification/src"
+
 	"fmt"
 )
 

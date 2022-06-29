@@ -1,7 +1,7 @@
 package helpers
 
 import (
-	"events-notification/messages"
+	"events-notification/models/messages"
 	"math/rand"
 )
 

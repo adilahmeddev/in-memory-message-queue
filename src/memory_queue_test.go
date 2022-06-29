@@ -1,8 +1,8 @@
-package events_notification
+package src
 
 import (
-	"events-notification/helpers"
-	"events-notification/messages"
+	"events-notification/models/helpers"
+	"events-notification/models/messages"
 	"github.com/alecthomas/assert/v2"
 	"testing"
 )

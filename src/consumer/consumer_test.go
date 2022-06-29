@@ -2,9 +2,9 @@ package consumer
 
 import (
 	"context"
-	mq "events-notification"
-	"events-notification/helpers"
-	"events-notification/messages"
+	"events-notification/models/helpers"
+	"events-notification/models/messages"
+	mq "events-notification/src"
 	"github.com/alecthomas/assert/v2"
 	"github.com/alecthomas/repr"
 	"testing"

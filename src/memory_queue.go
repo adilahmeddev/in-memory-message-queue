@@ -1,7 +1,7 @@
-package events_notification
+package src
 
 import (
-	"events-notification/messages"
+	"events-notification/models/messages"
 	"fmt"
 	"github.com/alecthomas/repr"
 )
