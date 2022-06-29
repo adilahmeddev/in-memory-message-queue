@@ -15,7 +15,7 @@ func TestConsumer(t *testing.T) {
 	t.Run("given multiple consumers", func(t *testing.T) {
 		t.Run("they can both consume the same message from the message queue", func(t *testing.T) {
 			var (
-				ctx, cancelFunc = context.WithDeadline(context.Background(), time.Now().Add(5*time.Second))
+				ctx, cancelFunc = context.WithDeadline(context.Background(), time.Now().Add(time.Second))
 				messageQueue    = mq.NewMemoryQueue()
 				consumerB       = NewConsumer(messageQueue)
 				consumerA       = NewConsumer(messageQueue)
@@ -26,12 +26,17 @@ func TestConsumer(t *testing.T) {
 
 			gotA, err := consumerA.Get(ctx)
 			assert.NoError(t, err)
-			assert.Equal(t, gotA, message)
+			contains(t, gotA, message)
 
 			gotB, err := consumerB.Get(ctx)
 			assert.NoError(t, err)
-			assert.Equal(t, gotB, message)
+			contains(t, gotB, message)
 
+			consumerC := NewConsumer(messageQueue)
+
+			gotC, err := consumerC.Get(ctx)
+			assert.NoError(t, err)
+			contains(t, gotC, message)
 			cancelFunc()
 
 		})
